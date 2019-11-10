@@ -13,7 +13,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class RegressionSuite extends Hooks {
+public class RegressionSuite  {
 
     private HomePage homePage = new HomePage();
     private ResultsPage resultsPage = new ResultsPage();
@@ -29,7 +29,7 @@ public class RegressionSuite extends Hooks {
         homePage.search(searchTerm);
         String actualTitle = resultsPage.getPageTitle();
         String actualThumNail = resultsPage.getThumbNail();
-        String actualCurrentUrl = getCurrentUrl();
+        String actualCurrentUrl = "";
 
         assertThat(actualTitle, is(equalToIgnoringCase(searchTerm)));
         assertThat(actualThumNail, is(equalToIgnoringCase(searchTerm)));

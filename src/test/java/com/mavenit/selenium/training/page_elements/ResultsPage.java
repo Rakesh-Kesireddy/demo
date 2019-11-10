@@ -1,6 +1,7 @@
 package com.mavenit.selenium.training.page_elements;
 
 import com.mavenit.selenium.training.Hooks;
+import com.mavenit.selenium.training.driver.DriverManager;
 import com.mavenit.selenium.training.utils.RandomNumberHelper;
 import junit.framework.TestCase;
 import org.openqa.selenium.By;
@@ -11,7 +12,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.fail;
 
-public class ResultsPage extends Hooks {
+public class ResultsPage extends DriverManager {
     public String getPageTitle() {
         return driver.findElement(By.className("pageTitle")).getText();
     }

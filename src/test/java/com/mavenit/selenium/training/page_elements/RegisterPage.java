@@ -1,4 +1,6 @@
 package com.mavenit.selenium.training.page_elements;
 
-public class RegisterPage {
+import com.mavenit.selenium.training.driver.DriverManager;
+
+public class RegisterPage extends DriverManager {
 }

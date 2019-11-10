@@ -1,6 +1,7 @@
 package com.mavenit.selenium.training.page_elements;
 
 import com.mavenit.selenium.training.Hooks;
+import com.mavenit.selenium.training.driver.DriverManager;
 import com.mavenit.selenium.training.utils.RandomNumberHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -9,7 +10,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.fail;
 
-public class HomePage extends Hooks {
+public class HomePage extends DriverManager {
 
     public static String searchitem;
 
