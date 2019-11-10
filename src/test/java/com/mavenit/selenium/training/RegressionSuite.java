@@ -1,9 +1,11 @@
 package com.mavenit.selenium.training;
 
 
-import com.mavenit.selenium.training.page_elements.LocatorHelper;
+import com.mavenit.selenium.training.page_elements.BasketPage;
+import com.mavenit.selenium.training.page_elements.HomePage;
+import com.mavenit.selenium.training.page_elements.ProductDescriptionPage;
+import com.mavenit.selenium.training.page_elements.ResultsPage;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,17 +15,21 @@ import static org.hamcrest.Matchers.*;
 
 public class RegressionSuite extends Hooks {
 
-    private LocatorHelper helper = new LocatorHelper();
+    private HomePage homePage = new HomePage();
+    private ResultsPage resultsPage = new ResultsPage();
+    private ProductDescriptionPage productDescriptionPage=new ProductDescriptionPage();
+    private BasketPage basketPage=new BasketPage();
 
     @Test
     public void searchTest() {
 
+
         String searchTerm = "laptops";
 
-        helper.search(searchTerm);
-        String actualTitle = helper.getPageTitle();
-        String actualThumNail = helper.getThumbNail();
-        String actualCurrentUrl = helper.getCurrentUrl();
+        homePage.search(searchTerm);
+        String actualTitle = resultsPage.getPageTitle();
+        String actualThumNail = resultsPage.getThumbNail();
+        String actualCurrentUrl = getCurrentUrl();
 
         assertThat(actualTitle, is(equalToIgnoringCase(searchTerm)));
         assertThat(actualThumNail, is(equalToIgnoringCase(searchTerm)));
@@ -33,10 +39,10 @@ public class RegressionSuite extends Hooks {
 
     @Test
     public void addProductToBasketTest() {
-        helper.search("cable");
-        String expected = helper.selectAnyProduct();
-        helper.addProductToBasket();
-        String actual = helper.getProuctsInBasket();
+        homePage.search("cable");
+        String expected = resultsPage.selectAnyProduct();
+        productDescriptionPage.addProductToBasket();
+        String actual = basketPage.getProuctsInBasket();
         assertThat(actual, is(equalToIgnoringCase(expected)));
     }
 
@@ -51,9 +57,9 @@ public class RegressionSuite extends Hooks {
 
 
         //actions
-        helper.search("laptop");
-        helper.selectPrice(priceRange);
-        List<Double> actualPriceList = helper.getAllProductPrices();
+        homePage.search("laptop");
+        resultsPage.selectPrice(priceRange);
+        List<Double> actualPriceList = resultsPage.getAllProductPrices();
 
         //follow any below one appraoch
         // verify
@@ -69,20 +75,20 @@ public class RegressionSuite extends Hooks {
     @Test
     public void suggestedDepSearchTest() {
         String searchTerm = "cable";
-        helper.enterSearchItem(searchTerm);
-        helper.selectDepartmentFromSuggestions(searchTerm);
+        homePage.enterSearchItem(searchTerm);
+        homePage.selectDepartmentFromSuggestions(searchTerm);
 
-        String actual = helper.getThumbNail();
+        String actual = resultsPage.getThumbNail();
         assertThat(actual, is(equalToIgnoringCase(searchTerm)));
     }
 
     @Test
     public void suggestedProductSearchTest() {
         String searchTerm = "cable";
-        helper.enterSearchItem(searchTerm);
-        helper.selectProductsFromSuggestions(searchTerm);
+        homePage.enterSearchItem(searchTerm);
+        homePage.selectProductsFromSuggestions(searchTerm);
 
-        String actual = helper.getThumbNail();
+        String actual = resultsPage.getThumbNail();
         assertThat(actual, is(equalToIgnoringCase(searchTerm)));
     }
 
