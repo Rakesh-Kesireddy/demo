@@ -26,4 +26,9 @@ public class Hooks {
     public void tearDown() {
         driver.quit();
     }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
+
 }
