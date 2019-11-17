@@ -5,6 +5,7 @@ import com.mavenit.selenium.training.driver.DriverManager;
 import com.mavenit.selenium.training.utils.RandomNumberHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
@@ -14,9 +15,17 @@ public class HomePage extends DriverManager {
 
     public static String searchitem;
 
+    @FindBy(id = "search")
+    private WebElement searchTxtBox;
+
+    @FindBy (css = ".dc-search-fieldset__submit-button")
+    private WebElement searchBtn;
+
+
+
     public void search(String item) {
-        driver.findElement(By.id("search")).clear();
-        driver.findElement(By.id("search")).clear();
+        searchTxtBox.clear();
+        searchTxtBox.clear();
 
         searchitem = item;
         enterSearchItem(item);
@@ -24,20 +33,20 @@ public class HomePage extends DriverManager {
     }
 
     public void enterSearchItem(String item) {
-        driver.findElement(By.id("search")).sendKeys(item);
+        searchTxtBox.sendKeys(item);
     }
 
     private void clickSearch() {
-        driver.findElement(By.cssSelector(".dc-search-fieldset__submit-button")).click();
+        searchBtn.click();
 
     }
 
     public void selectDepartmentFromSuggestions(String item) {
-        selectFromSuggestions(item, By.cssSelector(".suggestion dc-search-suggestions__suggestion--term"));
+        selectFromSuggestions(item, By.cssSelector(".dc-search-suggestions__suggestion--term"));
     }
 
     public void selectProductsFromSuggestions(String item) {
-        selectFromSuggestions(item, By.cssSelector(".suggestion dc-search-suggestions__suggestion--sayt"));
+        selectFromSuggestions(item, By.cssSelector(".dc-search-suggestions__suggestion--sayt"));
     }
 
     public void selectFromSuggestions(String item, By by) {

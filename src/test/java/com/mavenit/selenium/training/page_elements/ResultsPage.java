@@ -6,6 +6,7 @@ import com.mavenit.selenium.training.utils.RandomNumberHelper;
 import junit.framework.TestCase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,27 +14,38 @@ import java.util.List;
 import static junit.framework.TestCase.fail;
 
 public class ResultsPage extends DriverManager {
+
+    @FindBy(className = "pageTitle")
+    private WebElement pageTitle;
+
+    @FindBy(className = "current")
+    private WebElement thumbNail;
+
+    @FindBy(className = "productTitle")
+    private List<WebElement> prdouctTitleWebelements;
+
+
+
+
     public String getPageTitle() {
-        return driver.findElement(By.className("pageTitle")).getText();
+        return pageTitle.getText();
     }
 
     public String getThumbNail() {
-        return driver.findElement(By.className("current")).getText();
+        return thumbNail.getText();
     }
 
 
     public String selectAnyProduct() {
-        List<WebElement> productWebelements = driver.findElements(By.className("productTitle"));
 
-        if (productWebelements.size() == 0) {
+        if (prdouctTitleWebelements.size() == 0) {
             //throw new RuntimeException("you have 0 product for search term: "+searchitem);
             TestCase.fail("you have 0 product for search term: " + HomePage.searchitem);
         }
-
-        int productCount = productWebelements.size();
+        int productCount = prdouctTitleWebelements.size();
         int randomNumber = new RandomNumberHelper().generateRandomNumber(productCount);
-        String prouctSelected = productWebelements.get(randomNumber).getText();
-        productWebelements.get(randomNumber).click();
+        String prouctSelected = prdouctTitleWebelements.get(randomNumber).getText();
+        prdouctTitleWebelements.get(randomNumber).click();
 
         return prouctSelected;
     }

@@ -5,6 +5,7 @@ import cucumber.api.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,6 +13,10 @@ public class DriverManager  {
 
 
     public static WebDriver driver;
+
+    public DriverManager(){
+        PageFactory.initElements(driver,this);
+    }
 
     public void openBrowser() {
         WebDriverManager.chromedriver().setup();
